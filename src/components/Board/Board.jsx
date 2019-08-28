@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { connect } from 'react-redux'
 
 import Square from './Square/Square.jsx'
 
 function Board(props) {
 
   //TODO: Get this from redux
-  const board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const { board, players } = props
 
   return (
-    <div id="board" className="mt-4 d-flex flex-wrap">
-      {
-        board.map((el, i) => <Square key={i} seq={el} />)
-      }
-    </div>
+    <Fragment>
+      <div id="board" className="mt-4 d-flex flex-wrap">
+        {
+          board.map((symbol, i) => <Square key={i} index={i} symbol={symbol} />)
+        }
+      </div>
+
+      <div className="mt-4">
+        <div className="col">
+          <p><strong>Player 1</strong>: {players.p1}</p>
+          <p><strong>Player 2</strong>: {players.p2}</p>
+          <p><strong>Current Turn</strong>: {players.turn === 'p1' ? 'Player 1' : 'Player 2'}</p>
+        </div>
+      </div>
+    </Fragment>
   )
 }
 
-export default Board
+export default connect(({ board, players }) => ({ board, players }))(Board)

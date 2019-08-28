@@ -9,6 +9,14 @@
   background: lightgray
 }
 
+.disabled {  
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  background: white;
+}
+
 .symbol {
   line-height: 100px;
   font-weight: bold;
